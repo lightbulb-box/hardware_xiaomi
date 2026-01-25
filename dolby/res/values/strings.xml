@@ -129,4 +129,30 @@
     <string name="preset_export_failed">Export failed</string>
     <string name="preset_import_failed">Import failed</string>
 
+    <!-- Notification Access -->
+    <string name="notification_access_required">Notification Access Required</string>
+    <string name="notification_access_required_desc">Enable notification access to keep Dolby Atmos running in the background and allow automatic profile switching.</string>
+    <string name="enable_notification_access">Enable Notification Access</string>
+    <string name="enable_notification_access_desc">Enable notification access to keep Dolby Atmos running in the background and allow automatic profile switching.</string>
+    <string name="notification_access_permission_details">This permission allows Dolby Atmos to:\n\n• Run continuously in the background\n• Automatically switch audio profiles\n• Monitor foreground apps\n\nYour notifications will not be read or modified.</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="cancel">Cancel</string>
+
+    <!--import export -->
+    <string name="import_export_presets">Import/Export Presets</string>
+    <string name="import_presets">Import Presets</string>
+    <string name="import_presets_description">Import presets from files or clipboard</string>
+    <string name="import_single_file">Single File</string>
+    <string name="import_batch">Batch</string>
+    <string name="import_from_clipboard">From Clipboard</string>
+    <string name="your_custom_presets">Your Custom Presets</string>
+    <string name="processing">Processing...</string>
+    <string name="batch_export">Batch Export</string>
+    <string name="batch_export_description">Export all %1$s custom presets to a single file?</string>
+    <string name="export_all">Export All</string>
+
+    <!-- Dolby mid enhancer -->
+    <string name="dolby_mid_enhancer">Mid enhancer</string>
+    <string name="dolby_mid_level">Mid level</string>
+    <string name="dolby_mid_enhancer_summary">Enhances mid-frequency sounds for clearer vocals and instruments</string>
 </resources>

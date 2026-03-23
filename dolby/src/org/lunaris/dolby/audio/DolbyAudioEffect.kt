@@ -33,13 +33,22 @@ class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
         int32ToByteArray(param, buf, 0)
         int32ToByteArray(1, buf, 4)
         int32ToByteArray(value, buf, 8)
-        checkStatus(setParameter(EFFECT_PARAM_CPDP_VALUES, buf))
+        try {
+            checkStatus(setParameter(EFFECT_PARAM_CPDP_VALUES, buf))
+        } catch (e: UnsupportedOperationException) {
+            DolbyConstants.dlog(TAG, "setIntParam($param, $value) failed: ${e.message}")
+        }
     }
 
     private fun getIntParam(param: Int): Int {
         val buf = ByteArray(12)
         int32ToByteArray(param, buf, 0)
-        checkStatus(getParameter(EFFECT_PARAM_CPDP_VALUES + param, buf))
+        try {
+            checkStatus(getParameter(EFFECT_PARAM_CPDP_VALUES + param, buf))
+        } catch (e: UnsupportedOperationException) {
+            DolbyConstants.dlog(TAG, "getIntParam($param) failed: ${e.message}")
+            return 0
+        }
         return byteArrayToInt32(buf).also {
             DolbyConstants.dlog(TAG, "getIntParam($param): $it")
         }
@@ -59,7 +68,11 @@ class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
         int32ToByteArray(profile, buf, 8)
         int32ToByteArray(param.id, buf, 12)
         int32ArrayToByteArray(values, buf, 16)
-        checkStatus(setParameter(EFFECT_PARAM_CPDP_VALUES, buf))
+        try {
+            checkStatus(setParameter(EFFECT_PARAM_CPDP_VALUES, buf))
+        } catch (e: UnsupportedOperationException) {
+            DolbyConstants.dlog(TAG, "setDapParameter($param) failed: ${e.message}")
+        }
     }
 
     fun setDapParameter(param: DsParam, enable: Boolean, profile: Int = this.profile) =
@@ -73,7 +86,12 @@ class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
         val length = param.length
         val buf = ByteArray((length + 2) * 4)
         val p = (param.id shl 16) + (profile shl 8) + EFFECT_PARAM_GET_PROFILE_PARAMETER
-        checkStatus(getParameter(p, buf))
+        try {
+            checkStatus(getParameter(p, buf))
+        } catch (e: UnsupportedOperationException) {
+            DolbyConstants.dlog(TAG, "getDapParameter($param) failed: ${e.message}")
+            return IntArray(length)
+        }
         return byteArrayToInt32Array(buf, length)
     }
 
